@@ -13,9 +13,21 @@ class Questions extends Component {
 
     this.state = {
       match: this.props.match,
-      classes: this.props.classes
+      classes: this.props.classes,
+      questions: []
     };
   }
+
+  getQuestions = () => {
+    fetch("localhost:5000/admin/read")
+      .then(response => response.json())
+      .then(response =>
+        this.setState({ questions: response.data }, () => {
+          console.log(this.state.questions);
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
   render = () => {
     return (
@@ -26,14 +38,17 @@ class Questions extends Component {
           alignItems="center"
           justify="center"
         >
-          <Grid item xs={6} alignItems="center" justify="center">
+          <Grid item xs={6}>
             <Paper
               className={this.state.paper}
-              alignItems="center"
+              alignitems="center"
               justify="center"
               style={{ padding: 20 }}
             >
-              <TextField isQuestion={true}/>
+              <TextField
+                questions={this.state.questions}
+                getQuestions={() => this.getQuestions()}
+              />
               <RadioButton />
             </Paper>
           </Grid>
