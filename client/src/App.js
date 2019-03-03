@@ -18,9 +18,7 @@ class App extends Component {
               <Link to="/User">User</Link>
             </li>
           </ul>
-
           <hr />
-
           <Route path="/Admin" component={Admin} />
           <Route path="/User" component={User} />
         </div>
