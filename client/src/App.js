@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
-import Home from "./components/Home.js";
-import About from "./components/About.js";
-import Topics from "./components/Topics.js";
+import Admin from "./components/Admin.js";
+import User from "./components/User.js";
 
 class App extends Component {
   render() {
@@ -13,21 +12,17 @@ class App extends Component {
         <div>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/Admin">Admin</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
+              <Link to="/User">User</Link>
             </li>
           </ul>
 
           <hr />
 
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/topics" component={Topics} />
+          <Route path="/Admin" component={Admin} />
+          <Route path="/User" component={User} />
         </div>
       </Router>
     );
