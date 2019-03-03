@@ -1,0 +1,25 @@
+{
+  "name": "comp4711lab6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dshin21/COMP4711Lab6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dshin21/COMP4711Lab6/issues"
+  },
+  "homepage": "https://github.com/dshin21/COMP4711Lab6#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  }
+}
