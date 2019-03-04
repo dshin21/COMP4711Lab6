@@ -12,15 +12,15 @@ class App extends Component {
         <div>
           <ul>
             <li>
-              <Link to="/Admin">Admin</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <li>
-              <Link to="/User">User</Link>
+              <Link to="/aser">User</Link>
             </li>
           </ul>
           <hr />
-          <Route path="/Admin" component={Admin} />
-          <Route path="/User" component={User} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/user" component={User} />
         </div>
       </Router>
     );
