@@ -4,11 +4,19 @@ const cors = require("cors");
 const path = require("path");
 
 // production
+// const connection = mysql.createConnection({
+//   host: "us-cdbr-iron-east-03.cleardb.net",
+//   user: "bfc26ab395c356",
+//   password: "cae20b58",
+//   database: "heroku_1dbeb68ab9dfec3"
+// });
+
+// asn1
 const connection = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
-  user: "bfc26ab395c356",
-  password: "cae20b58",
-  database: "heroku_1dbeb68ab9dfec3"
+  user: "b54bd99ba59371",
+  password: "2d211ca1",
+  database: "heroku_bb4f7a09a393d7b"
 });
 
 //dev
@@ -70,6 +78,7 @@ app.get("/admin/insert", (req, res) => {
 
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
+
   let query_insert_question = `INSERT INTO questions (question, answers, answer_key) 
                                 VALUES('${question}','${answers}','${answer_key}')`;
   connection.query(query_insert_question, (error, results) => {
