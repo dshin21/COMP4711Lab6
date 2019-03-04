@@ -25,22 +25,21 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.set("port", process.env.PORT || 5000);
 
-
 app.get("/admin/read", (req, res) => {
-  let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-  connection.query(query_create_DB, (err, res) => {
-    if (err) console.log(err);
+  // let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
+  // connection.query(query_create_DB, (err, res) => {
+  // if (err) console.log(err);
 
-    connection.query("USE comp4711_lab6", error => {
-      if (err) throw err;
+  connection.query("USE heroku_1dbeb68ab9dfec3", error => {
+    if (err) throw err;
 
-      //create questions table
-      let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
-      connection.query(query_create_questions_table, (error, results) => {
-        if (error) console.log(error);
-        else console.log(results);
-      });
+    //create questions table
+    let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
+    connection.query(query_create_questions_table, (error, results) => {
+      if (error) console.log(error);
+      else console.log(results);
     });
+    // });
   });
 
   //read questions & answers
@@ -53,22 +52,22 @@ app.get("/admin/read", (req, res) => {
 });
 
 app.get("/admin/insert", (req, res) => {
-  let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-  connection.query(query_create_DB, (err, res) => {
-    if (err) console.log(err);
+  // let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
+  // connection.query(query_create_DB, (err, res) => {
+  // if (err) console.log(err);
 
-    connection.query("USE comp4711_lab6", error => {
-      if (error) throw error;
+  connection.query("USE heroku_1dbeb68ab9dfec3", error => {
+    if (error) throw error;
 
-      //create questions table
-      let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
-      connection.query(query_create_questions_table, (error, results) => {
-        if (error) console.log(error);
-        else console.log(results);
-      });
+    //create questions table
+    let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
+    connection.query(query_create_questions_table, (error, results) => {
+      if (error) console.log(error);
+      else console.log(results);
     });
+    // });
   });
-  
+
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
   let query_insert_question = `INSERT INTO questions (question, answers, answer_key) 
