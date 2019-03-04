@@ -3,21 +3,21 @@ const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
 
-//production
-// const connection = mysql.createConnection({
-//   host: "us-cdbr-iron-east-03.cleardb.net",
-//   user: "bfc26ab395c356",
-//   password: "cae20b58",
-//   database: "heroku_1dbeb68ab9dfec3"
-// });
+production
+const connection = mysql.createConnection({
+  host: "us-cdbr-iron-east-03.cleardb.net",
+  user: "bfc26ab395c356",
+  password: "cae20b58",
+  database: "heroku_1dbeb68ab9dfec3"
+});
 
 //dev
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "comp4711_lab6"
-});
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "comp4711_lab6"
+// });
 
 let app = express();
 app.use(cors());
