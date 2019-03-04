@@ -68,7 +68,7 @@ app.get("/admin/insert", (req, res) => {
   // if (error) throw error;
 
   var sql_create_db =
-    "CREATE DATABASE IF NOT EXISTS comp4711_lab6 (name VARCHAR(255), score VARCHAR(255))";
+    "CREATE DATABASE IF NOT EXISTS comp4711_lab6 (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))";
   connection.query(sql_create_db, function(err, res) {});
 
   //create questions table
