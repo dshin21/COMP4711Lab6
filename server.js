@@ -51,12 +51,12 @@ app.get("/admin/read", (req, res) => {
   // });
 
   //read questions & answers
-  let query_read_questions = `SELECT *
-                              FROM questions`;
-  connection.query(query_read_questions, (error, results) => {
-    if (error) console.log(error);
-    else console.log(res);
-  });
+  // let query_read_questions = `SELECT *
+  //                             FROM questions`;
+  // connection.query(query_read_questions, (error, results) => {
+  //   if (error) console.log(error);
+  //   else console.log(res);
+  // });
 });
 
 app.get("/admin/insert", (req, res) => {
