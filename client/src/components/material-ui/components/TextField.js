@@ -26,7 +26,6 @@ class mTextField extends Component {
   };
 
   render = () => {
-    console.log(this.state.questions);
     return (
       <div>
         <TextField

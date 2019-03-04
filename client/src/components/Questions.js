@@ -18,7 +18,7 @@ class Questions extends Component {
     };
   }
 
-  getQuestions = () => {
+  getQuestions = _ => {
     fetch("https://comp4711lab6.herokuapp.com/admin/read")
       .then(response => response.json())
       .then(response =>

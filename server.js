@@ -50,7 +50,10 @@ app.get("/admin/read", (req, res) => {
                               FROM questions`;
   connection.query(query_read_questions, (error, results) => {
     if (error) console.log(error);
-    else console.log(res);
+    else
+      res.json({
+        data: results
+      });
   });
 });
 
