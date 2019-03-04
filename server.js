@@ -4,12 +4,12 @@ const cors = require("cors");
 const path = require("path");
 
 // production
-// const connection = mysql.createConnection({
-//   host: "us-cdbr-iron-east-03.cleardb.net",
-//   user: "bfc26ab395c356",
-//   password: "cae20b58",
-//   database: "heroku_1dbeb68ab9dfec3"
-// });
+const connection = mysql.createConnection({
+  host: "us-cdbr-iron-east-03.cleardb.net",
+  user: "bfc26ab395c356",
+  password: "cae20b58",
+  database: "heroku_1dbeb68ab9dfec3"
+});
 
 //dev
 // const connection = mysql.createConnection({
