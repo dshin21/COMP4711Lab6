@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
 
-production
+// production
 const connection = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
   user: "bfc26ab395c356",

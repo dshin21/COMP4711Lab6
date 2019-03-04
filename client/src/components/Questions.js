@@ -19,7 +19,7 @@ class Questions extends Component {
   }
 
   getQuestions = () => {
-    fetch("localhost:5000/admin/read")
+    fetch("https://comp4711lab6.herokuapp.com/admin/read")
       .then(response => response.json())
       .then(response =>
         this.setState({ questions: response.data }, () => {
