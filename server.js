@@ -30,9 +30,9 @@ app.get("/admin/read", (req, res) => {
   //   if (err) console.log(err);
   //   else console.log("db created");
 
-    // connection.query("USE comp4711_lab6", error => {
-    //   if (error) throw error;
-    // });
+  // connection.query("USE comp4711_lab6", error => {
+  //   if (error) throw error;
+  // });
   // });
 
   //create questions table
@@ -52,9 +52,12 @@ app.get("/admin/read", (req, res) => {
   });
 });
 
-// app.get("/admin/read", (req, res) => {});
-
 app.get("/admin/insert", (req, res) => {
+  let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
+  connection.query(query_create_questions_table, (error, results) => {
+    if (error) console.log(error);
+    else console.log("table created");
+  });
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
   let query_insert_question = `INSERT INTO questions
