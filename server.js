@@ -25,16 +25,16 @@ app.set("port", process.env.PORT || 5000);
 
 app.get("/admin/read", (req, res) => {
   //create DB
-  let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-  connection.query(query_create_DB, (err, res) => {
-    if (err) console.log(err);
-    else console.log("db created");
+  // let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
+  // connection.query(query_create_DB, (err, res) => {
+  //   if (err) console.log(err);
+  //   else console.log("db created");
 
     // connection.query("USE comp4711_lab6", error => {
     //   if (error) throw error;
     // });
-  });
-  
+  // });
+
   //create questions table
   let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
   connection.query(query_create_questions_table, (error, results) => {
