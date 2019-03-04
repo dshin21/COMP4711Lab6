@@ -58,7 +58,7 @@ app.get("/admin/insert", (req, res) => {
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
   let query_insert_question = `INSERT INTO questions (question, answers, answer_key) 
-                                VALUES('${question}','${answers}','${answer_key}')`;
+                                VALUES("${question}","${answers}","${answer_key}")`;
   connection.query(query_insert_question, (error, results) => {
     if (error) console.log(error);
     else console.log(results);
@@ -69,10 +69,10 @@ app.get("/admin/update", (req, res) => {
   //update a question & answer
   const { question, answers, answer_key } = req.query;
   let query_update_question = `UPDATE questions
-                                SET question = '${question}',
-                                    answers   = '${answers}',
-                                    answer_key   = '${answer_key}'
-                                WHERE question = '${question}'`;
+                                SET question = "${question}",
+                                    answers   = "${answers}",
+                                    answer_key   = "${answer_key}"
+                                WHERE question = "${question}"`;
   connection.query(query_update_question, (error, results) => {
     if (error) console.log(error);
     else console.log(results);
