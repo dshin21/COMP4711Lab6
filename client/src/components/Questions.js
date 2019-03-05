@@ -26,7 +26,7 @@ class Questions extends Component {
           (state, props) => {
             return { questions: JSON.stringify(response.data) };
           },
-          () => console.log(response.data)
+          () => console.log(this.state.questions)
         )
       )
       .catch(err => console.log(err));
