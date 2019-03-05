@@ -29,7 +29,7 @@ app.get("/admin/read", (req, res) => {
   //create questions table
   let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
   connection.query(query_create_questions_table, (error, results) => {
-    if (error) console.log(error);
+    if (error) throw error;
     else console.log(results);
   });
 
@@ -37,18 +37,18 @@ app.get("/admin/read", (req, res) => {
   let query_read_questions = `SELECT *
                               FROM questions`;
   connection.query(query_read_questions, (error, results) => {
-    if (error) console.log(error);
+    if (error) throw error;
     else console.log(res);
   });
 });
 
 app.get("/admin/insert", (req, res) => {
   //create questions table
-  let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
-  connection.query(query_create_questions_table, (error, results) => {
-    if (error) console.log(error);
-    else console.log(results);
-  });
+  // let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
+  // connection.query(query_create_questions_table, (error, results) => {
+  //   if (error) console.log(error);
+  //   else console.log(results);
+  // });
 
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
@@ -56,7 +56,7 @@ app.get("/admin/insert", (req, res) => {
   let query_insert_question = `INSERT INTO questions (question, answers, answer_key) 
                                 VALUES('${question}','${answers}','${answer_key}')`;
   connection.query(query_insert_question, (error, results) => {
-    if (error) console.log(error);
+    if (error) throw error;
     else console.log(results);
   });
 });
@@ -70,7 +70,7 @@ app.get("/admin/update", (req, res) => {
                                     answer_key   = '${answer_key}'
                                 WHERE question = '${question}'`;
   connection.query(query_update_question, (error, results) => {
-    if (error) console.log(error);
+    if (error) throw error;
     else console.log(results);
   });
 });
@@ -81,7 +81,7 @@ app.get("/admin/delete", (req, res) => {
   let query_delete_question = `DELETE FROM questions
                                 WHERE question = '${question}'`;
   connection.query(query_delete_question, (error, results) => {
-    if (error) console.log(error);
+    if (error) throw error;
     else console.log(results);
   });
 });
