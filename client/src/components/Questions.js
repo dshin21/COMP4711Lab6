@@ -25,7 +25,7 @@ class Questions extends Component {
         this.setState(
           { questions: this.state.questions.push(response.data) },
           () => {
-            console.log(this.state.questions);
+            console.log(response.data);
           }
         )
       )
