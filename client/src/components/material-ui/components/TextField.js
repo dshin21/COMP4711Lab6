@@ -15,16 +15,6 @@ class mTextField extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.questions !== nextProps.questions) {
-      this.setState({ questions: nextProps.questions });
-    }
-  }
-
-  componentDidMount = () => {
-    this.props.getQuestions();
-  };
-
   render = () => {
     return (
       <div>

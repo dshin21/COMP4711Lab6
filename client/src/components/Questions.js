@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import styles from "./material-ui/styles/style_Grid";
-
-import TextField from "./material-ui/components/TextField";
-import RadioButton from "./material-ui/components/RadioButton";
+import QuestionList from "./QuestionList";
 
 class Questions extends Component {
   constructor(props) {
@@ -14,23 +11,15 @@ class Questions extends Component {
     this.state = {
       match: this.props.match,
       classes: this.props.classes,
-      questions: []
+      questions: this.props.questions
     };
   }
 
-  getQuestions = _ => {
-    fetch("https://comp4711lab6.herokuapp.com/admin/read")
-      .then(response => response.json())
-      .then(response =>
-        this.setState(
-          (state, props) => {
-            return { questions: JSON.stringify(response.data) };
-          },
-          () => console.log(this.state.questions)
-        )
-      )
-      .catch(err => console.log(err));
-  };
+  componentWillReceiveProps(nextProps) {
+    if (this.props.questions !== nextProps.questions) {
+      this.setState({ questions: nextProps.questions });
+    }
+  }
 
   render = () => {
     return (
@@ -41,20 +30,7 @@ class Questions extends Component {
           alignItems="center"
           justify="center"
         >
-          <Grid item xs={6}>
-            <Paper
-              className={this.state.paper}
-              alignitems="center"
-              justify="center"
-              style={{ padding: 20 }}
-            >
-              <TextField
-                questions={this.state.questions}
-                getQuestions={() => this.getQuestions()}
-              />
-              <RadioButton />
-            </Paper>
-          </Grid>
+          <QuestionList questions={this.state.questions} />
         </Grid>
         <br />
       </div>
