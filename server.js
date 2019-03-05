@@ -4,19 +4,11 @@ const cors = require("cors");
 const path = require("path");
 
 // production
-// const connection = mysql.createConnection({
-//   host: "us-cdbr-iron-east-03.cleardb.net",
-//   user: "bfc26ab395c356",
-//   password: "cae20b58",
-//   database: "heroku_1dbeb68ab9dfec3"
-// });
-
-// asn1
 const connection = mysql.createConnection({
   host: "us-cdbr-iron-east-03.cleardb.net",
-  user: "b54bd99ba59371",
-  password: "2d211ca1",
-  database: "heroku_bb4f7a09a393d7b"
+  user: "bfc26ab395c356",
+  password: "cae20b58",
+  database: "heroku_1dbeb68ab9dfec3"
 });
 
 //dev
@@ -34,51 +26,29 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.set("port", process.env.PORT || 5000);
 
 app.get("/admin/read", (req, res) => {
-  // let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-  // connection.query(query_create_DB, (err, res) => {
-  // if (err) console.log(err);
-
-  // connection.query("USE comp4711_lab6", error => {
-  // if (err) throw err;
-
   //create questions table
   let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
   connection.query(query_create_questions_table, (error, results) => {
     if (error) console.log(error);
     else console.log(results);
   });
-  // });
-  // });
 
   //read questions & answers
-  // let query_read_questions = `SELECT *
-  //                             FROM questions`;
-  // connection.query(query_read_questions, (error, results) => {
-  //   if (error) console.log(error);
-  //   else console.log(res);
-  // });
+  let query_read_questions = `SELECT *
+                              FROM questions`;
+  connection.query(query_read_questions, (error, results) => {
+    if (error) console.log(error);
+    else console.log(res);
+  });
 });
 
 app.get("/admin/insert", (req, res) => {
-  // let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-  // connection.query(query_create_DB, (err, res) => {
-  // if (err) console.log(err);
-
-  // connection.query("USE comp4711_lab6", error => {
-  // if (error) throw error;
-
-  var sql_create_db =
-    "CREATE DATABASE IF NOT EXISTS comp4711_lab6 (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))";
-  connection.query(sql_create_db, function(err, res) {});
-
   //create questions table
   let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
   connection.query(query_create_questions_table, (error, results) => {
     if (error) console.log(error);
     else console.log(results);
   });
-  // });
-  // });
 
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
