@@ -22,10 +22,14 @@ class Questions extends Component {
     fetch("https://comp4711lab6.herokuapp.com/admin/read")
       .then(response => response.json())
       .then(response =>
-        this.setState({ questions: [response.data] }, () => {
-          console.log(this.state.questions);
-        })
-      ).catch(err => console.log(err));
+        this.setState(
+          { questions: this.state.questions.push(response.data) },
+          () => {
+            console.log(this.state.questions);
+          }
+        )
+      )
+      .catch(err => console.log(err));
   };
 
   render = () => {
