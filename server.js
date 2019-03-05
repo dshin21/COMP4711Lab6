@@ -26,13 +26,6 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.set("port", process.env.PORT || 5000);
 
 app.get("/admin/read", (req, res) => {
-  //create questions table
-  // let query_create_questions_table = `CREATE TABLE IF NOT EXISTS questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
-  // connection.query(query_create_questions_table, (error, results) => {
-  //   if (error) throw error;
-  //   else console.log(results);
-  // });
-
   //read questions & answers
   let query_read_questions = `SELECT *
                               FROM questions`;
