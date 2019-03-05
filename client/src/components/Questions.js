@@ -25,8 +25,7 @@ class Questions extends Component {
         this.setState({ questions: response.data }, () => {
           console.log(this.state.questions);
         })
-      )
-      .catch(err => console.log(err));
+      ).catch(err => console.log(err));
   };
 
   render = () => {
