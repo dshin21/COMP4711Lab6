@@ -27,13 +27,15 @@ class mBottomNav extends Component {
       >
         <Button
           color="secondary"
-          updateQuestions={this.props.updateQuestions}
+          insertQuestions={this.props.insertQuestions}
           BtnName={"Add"}
+          isAdd={true}
         />
         <Button
           color="primary"
           updateQuestions={this.props.updateQuestions}
           BtnName={"Save"}
+          isSave={true}
         />
       </BottomNavigation>
     );

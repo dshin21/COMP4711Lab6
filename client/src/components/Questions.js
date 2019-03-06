@@ -25,14 +25,7 @@ class Questions extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.questions !== nextProps.questions) {
-      this.setState(
-        { questions: nextProps.questions }
-        // , () => {
-        // this.state.questions.map((e, i) => {
-        //   // console.log(e.question);
-        // });
-        // }
-      );
+      this.setState({ questions: nextProps.questions });
       console.log(nextProps.questions);
     }
   }
@@ -41,19 +34,19 @@ class Questions extends Component {
     return answerString.split(",");
   };
 
-  // insertQuestions = (question, answers, answer_key) => {
-  //   // fetch(
-  //   //   `https://comp4711assignment.herokuapp.com/players/add?name=${name}&score=${score}`
-  //   // )
-  //   fetch(
-  //     `http://localhost:5000/admin/insert?question=${question}&answers=${answers}&answer_key${answer_key}`
-  //   )
-  //     .then(response => response.json())
-  //     .catch(err => console.log(err));
-  //   // console.log(this.state.questions);
-  // };
+  insertQuestions = () => {
+    let temp = {
+      question: "",
+      answers: "",
+      answer_key: ""
+    };
+    let tempState = this.state.questions;
+    tempState.push(temp);
+    console.log(tempState);
+    this.setState({ question: tempState });
+  };
 
-  updateQuestions = (question, answers, answer_key) => {
+  updateQuestions = () => {
     fetch(`http://localhost:5000/admin/truncate`)
       .then(response => response.json())
       .catch(err => console.log(err));
@@ -68,12 +61,13 @@ class Questions extends Component {
         .catch(err => console.log(err));
       console.log(e.answers);
     });
+    this.setState({ snackSaved: true });
   };
 
   deleteQuestion = question => {
-    // fetch(`http://localhost:5000/admin/delete?question=${question}`)
-    //   .then(response => response.json())
-    //   .catch(err => console.log(err));
+    fetch(`http://localhost:5000/admin/delete?question=${question}`)
+      .then(response => response.json())
+      .catch(err => console.log(err));
 
     this.setState({ snackDeleted: true });
   };
@@ -108,6 +102,11 @@ class Questions extends Component {
         ) : (
           ""
         )}
+        {this.state.snackSaved ? (
+          <SnackBar open={true} val={"Saved Successfully!"} />
+        ) : (
+          ""
+        )}
         <Grid
           container
           className={this.state.classes.root}
@@ -135,7 +134,6 @@ class Questions extends Component {
                   answersChanged={this.answersChanged}
                   answer_keyChanged={this.answer_keyChanged}
                   isAnswers={false}
-                  isDelete={false}
                 />
                 <Button
                   BtnName="Delete"
@@ -147,7 +145,10 @@ class Questions extends Component {
             </Grid>
           ))}
         </Grid>
-        <BottomNav updateQuestions={this.updateQuestions} />
+        <BottomNav
+          insertQuestions={this.insertQuestions}
+          updateQuestions={this.updateQuestions}
+        />
       </div>
     );
   };
