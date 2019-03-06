@@ -15,8 +15,7 @@ class Admin extends Component {
   };
 
   getQuestions = _ => {
-    // fetch("https://comp4711lab6.herokuapp.com/admin/read")
-    fetch("http://localhost:5000/admin/read")
+    fetch("https://comp4711lab6.herokuapp.com/admin/read")
       .then(response => response.json())
       .then(response => {
         let temp = [];

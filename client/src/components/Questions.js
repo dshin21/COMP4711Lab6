@@ -51,13 +51,13 @@ class Questions extends Component {
   };
 
   updateQuestions = () => {
-    fetch(`http://localhost:5000/admin/truncate`)
+    fetch(`https://comp4711lab6.herokuapp.com/admin/truncate`)
       .then(response => response.json())
       .catch(err => console.log(err));
 
     this.state.questions.map(e => {
       fetch(
-        `http://localhost:5000/admin/insert?question=${e.question}&answers=${
+        `https://comp4711lab6.herokuapp.com/admin/insert?question=${e.question}&answers=${
           e.answers
         }&answer_key=${e.answer_key}`
       )
@@ -69,7 +69,7 @@ class Questions extends Component {
   };
 
   deleteQuestion = (question, idx) => {
-    fetch(`http://localhost:5000/admin/delete?question=${question}`)
+    fetch(`https://comp4711lab6.herokuapp.com/admin/delete?question=${question}`)
       .then(response => response.json())
       .catch(err => console.log(err));
     let temp = this.state.questions;

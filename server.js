@@ -12,12 +12,12 @@ var connection = mysql.createConnection({
 });
 
 //dev
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "comp4711_lab6"
-});
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "comp4711_lab6"
+// });
 
 let app = express();
 app.use(cors());
@@ -25,25 +25,11 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.set("port", process.env.PORT || 5000);
 
-// let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
-// connection.query(query_create_DB, (err, res) => {
-//   if (err) console.log(err);
-// });
-// connection.query("USE comp4711_lab6", err => {
-//   if (err) throw err;
-// });
-
 app.get("/admin/read", (req, res) => {
   let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
   connection.query(query_create_DB, (err, res) => {
     if (err) console.log(err);
   });
-
-  // let query_create_questions_table = `CREATE TABLE questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255), PRIMARY KEY (question))`;
-  // connection.query(query_create_questions_table, (error, results) => {
-  //   if (error) console.log(error);
-  //   else console.log("table created");
-  // });
 
   //read questions & answers
   let query_read_questions = `SELECT *
@@ -68,9 +54,7 @@ app.get("/admin/truncate", (req, res) => {
 app.get("/admin/insert", (req, res) => {
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
-  // let query_insert_question = `INSERT INTO questions (question, answers, answer_key)
-  //                               VALUES('${question}','${answers}','${answer_key}')`;
-
+  
   let query_insert_question = `REPLACE INTO questions
                                   SET question = '${question}',
                                       answers = '${answers}',
