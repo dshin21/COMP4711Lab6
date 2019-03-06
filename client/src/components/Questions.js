@@ -5,6 +5,8 @@ import styles from "./material-ui/styles/style_Grid";
 import TextField from "./material-ui/components/TextField";
 import RadioButton from "./material-ui/components/RadioButton";
 import Paper from "@material-ui/core/Paper";
+// import Button from './material-ui/components/Button';
+import BottomNav from "./material-ui/components/BottomNav";
 
 class Questions extends Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class Questions extends Component {
     this.state = {
       match: this.props.match,
       classes: this.props.classes,
-      questions: this.props.questions
+      questions: this.props.questions,
+      questionCounter: 0
     };
   }
 
@@ -30,35 +33,40 @@ class Questions extends Component {
 
   parseAnswers = answerString => {
     return answerString.split(",");
-    // let temp = answerString.split(",");
-    // console.log(temp);
   };
 
   render = () => {
     return (
-      <Grid
-        container
-        className={this.state.classes.root}
-        alignItems="center"
-        justify="center"
-      >
-        {this.state.questions.map((e, i) => (
-          <Grid item xs={7} key={"mykey" + i} style={{ marginBottom: 20 }}>
-            <Paper
-              className={this.state.paper}
-              alignitems="center"
-              justify="center"
-              style={{ padding: 20 }}
-            >
-              <TextField question={e.question} />
-              <RadioButton
-                answers={this.parseAnswers(e.answers)}
-                answer_key={e.answer_key}
-              />
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+      <div>
+        <Grid
+          container
+          className={this.state.classes.root}
+          alignItems="center"
+          justify="center"
+        >
+          {this.state.questions.map((e, i) => (
+            <Grid item xs={7} key={"mykey" + i} style={{ marginBottom: 20 }}>
+              <Paper
+                className={this.state.paper}
+                alignitems="center"
+                justify="center"
+                style={{ padding: 20 }}
+              >
+                <TextField
+                  question={e.question}
+                  questionCounter={this.state.questionCounter}
+                />
+                <RadioButton
+                  answers={this.parseAnswers(e.answers)}
+                  answer_key={e.answer_key}
+                  questionCounter={this.state.questionCounter}
+                />
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+        <BottomNav />
+      </div>
     );
   };
 }

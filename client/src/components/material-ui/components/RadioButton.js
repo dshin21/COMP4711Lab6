@@ -42,8 +42,8 @@ class mRadioButton extends Component {
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>
           <RadioGroup
-            aria-label="Q1"
-            name="Q1"
+            aria-label="Q"
+            name="Q"
             className={classes.group}
             value={this.state.answer_key}
             onChange={this.handleChange}

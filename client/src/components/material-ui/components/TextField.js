@@ -40,9 +40,10 @@ class mTextField extends Component {
               notchedOutline: this.state.notchedOutline
             }
           }}
-          label={this.state.question}
+          label={"Question"}
           variant="outlined"
           id="custom-css-outlined-input"
+          value={this.state.question}
         />
     );
   };

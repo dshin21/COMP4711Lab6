@@ -32,6 +32,7 @@ class Topic extends Component {
     return (
       <div>
         <Questions questions={this.state.questions} />
+        
       </div>
     );
   };
