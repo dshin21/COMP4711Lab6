@@ -6,6 +6,8 @@ import TextField from "./material-ui/components/TextField";
 import RadioButton from "./material-ui/components/RadioButton";
 import Paper from "@material-ui/core/Paper";
 import BottomNav from "./material-ui/components/BottomNav";
+import Button from "./material-ui/components/Button";
+import SnackBar from "./material-ui/components/SnackBar";
 
 class Questions extends Component {
   constructor(props) {
@@ -15,7 +17,9 @@ class Questions extends Component {
       match: this.props.match,
       classes: this.props.classes,
       questions: this.props.questions,
-      isUpdate: false
+      isUpdate: false,
+      snackDeleted: false,
+      snackSaved: false
     };
   }
 
@@ -66,6 +70,14 @@ class Questions extends Component {
     });
   };
 
+  deleteQuestion = question => {
+    // fetch(`http://localhost:5000/admin/delete?question=${question}`)
+    //   .then(response => response.json())
+    //   .catch(err => console.log(err));
+
+    this.setState({ snackDeleted: true });
+  };
+
   questionChanged = (idx, newVal) => {
     let temp = this.state.questions;
     temp[idx].question = newVal;
@@ -91,6 +103,11 @@ class Questions extends Component {
   render = () => {
     return (
       <div>
+        {this.state.snackDeleted ? (
+          <SnackBar open={true} val={"Deleted Successfully!"} />
+        ) : (
+          ""
+        )}
         <Grid
           container
           className={this.state.classes.root}
@@ -118,6 +135,13 @@ class Questions extends Component {
                   answersChanged={this.answersChanged}
                   answer_keyChanged={this.answer_keyChanged}
                   isAnswers={false}
+                  isDelete={false}
+                />
+                <Button
+                  BtnName="Delete"
+                  value={e.question}
+                  deleteQuestion={this.deleteQuestion}
+                  isDelete={true}
                 />
               </Paper>
             </Grid>

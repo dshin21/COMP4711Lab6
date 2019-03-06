@@ -10,12 +10,15 @@ class mButton extends Component {
     this.state = {
       classes: this.props,
       BtnName: this.props.BtnName,
-      color: this.props.color
+      color: this.props.color,
+      isDelete: this.props.isDelete,
+      value: this.props.value
     };
   }
 
   handleClick = () => {
-    this.props.updateQuestions();
+    if (this.state.isDelete) this.props.deleteQuestion(this.state.value);
+    else this.props.updateQuestions();
   };
 
   render() {
