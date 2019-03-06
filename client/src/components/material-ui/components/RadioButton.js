@@ -7,6 +7,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import TextField from "./TextField";
 
 class mRadioButton extends Component {
   constructor(props) {
@@ -16,11 +17,14 @@ class mRadioButton extends Component {
       classes: this.props.classes,
       answers: this.props.answers,
       answer_key: this.props.answer_key,
+      questionIndex: this.props.questionIndex
     };
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ answer_key: event.target.value }, () => {
+      this.props.answer_keyChanged();
+    });
   };
 
   componentWillReceiveProps(nextProps) {
@@ -51,22 +55,50 @@ class mRadioButton extends Component {
             <FormControlLabel
               value="a"
               control={<Radio />}
-              label={this.state.answers[0]}
+              label={
+                <TextField
+                  questionIndex={this.state.questionIndex}
+                  answersChanged={this.props.answersChanged}
+                  value={this.state.answers[0]}
+                  answers_idx={0}
+                />
+              }
             />
             <FormControlLabel
               value="b"
               control={<Radio />}
-              label={this.state.answers[1]}
+              label={
+                <TextField
+                  questionIndex={this.state.questionIndex}
+                  answersChanged={this.props.answersChanged}
+                  value={this.state.answers[1]}
+                  answers_idx={1}
+                />
+              }
             />
             <FormControlLabel
               value="c"
               control={<Radio />}
-              label={this.state.answers[2]}
+              label={
+                <TextField
+                  questionIndex={this.state.questionIndex}
+                  answersChanged={this.props.answersChanged}
+                  value={this.state.answers[2]}
+                  answers_idx={2}
+                />
+              }
             />
             <FormControlLabel
               value="d"
               control={<Radio />}
-              label={this.state.answers[3]}
+              label={
+                <TextField
+                  questionIndex={this.state.questionIndex}
+                  answersChanged={this.props.answersChanged}
+                  value={this.state.answers[3]}
+                  answers_idx={3}
+                />
+              }
             />
           </RadioGroup>
         </FormControl>

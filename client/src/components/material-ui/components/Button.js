@@ -8,14 +8,18 @@ class mButton extends Component {
     super(props);
 
     this.state = {
-      classes: this.props,
-      question: this.props.question
+      classes: this.props
     };
   }
 
+
   render() {
     return (
-      <Button variant="contained" className={this.state.classes.button} style={{marginTop:20}}>
+      <Button
+        variant="contained"
+        className={this.state.classes.button}
+        style={{ marginTop: 20 }}
+      >
         Save
       </Button>
     );
