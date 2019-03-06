@@ -14,12 +14,14 @@ class mButton extends Component {
       isDelete: this.props.isDelete,
       isSave: this.props.isSave,
       isAdd: this.props.isAdd,
-      value: this.props.value
+      value: this.props.value,
+      idx: this.props.idx
     };
   }
 
   handleClick = () => {
-    if (this.state.isDelete) this.props.deleteQuestion(this.state.value);
+    if (this.state.isDelete)
+      this.props.deleteQuestion(this.state.value, this.state.idx);
     else if (this.state.isSave) this.props.updateQuestions();
     else if (this.state.isAdd) this.props.insertQuestions();
   };

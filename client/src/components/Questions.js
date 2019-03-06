@@ -61,15 +61,17 @@ class Questions extends Component {
         .catch(err => console.log(err));
       console.log(e.answers);
     });
-    this.setState({ snackSaved: true });
+    this.setState({ snackSaved: true, state: this.state });
   };
 
-  deleteQuestion = question => {
+  deleteQuestion = (question, idx) => {
     fetch(`http://localhost:5000/admin/delete?question=${question}`)
       .then(response => response.json())
       .catch(err => console.log(err));
-
-    this.setState({ snackDeleted: true });
+    let temp = this.state.questions;
+    temp.splice(idx, 1);
+    console.log(temp);
+    this.setState({ snackDeleted: true, question: temp });
   };
 
   questionChanged = (idx, newVal) => {
@@ -138,6 +140,7 @@ class Questions extends Component {
                 <Button
                   BtnName="Delete"
                   value={e.question}
+                  idx={i}
                   deleteQuestion={this.deleteQuestion}
                   isDelete={true}
                 />
