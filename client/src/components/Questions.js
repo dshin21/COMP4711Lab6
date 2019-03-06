@@ -24,9 +24,15 @@ class Questions extends Component {
           // console.log(e.question);
         });
       });
-      // console.log(nextProps.questions[0].question);
+      console.log(nextProps.questions);
     }
   }
+
+  parseAnswers = answerString => {
+    return answerString.split(",");
+    // let temp = answerString.split(",");
+    // console.log(temp);
+  };
 
   render = () => {
     return (
@@ -45,7 +51,10 @@ class Questions extends Component {
               style={{ padding: 20 }}
             >
               <TextField question={e.question} />
-              <RadioButton />
+              <RadioButton
+                answers={this.parseAnswers(e.answers)}
+                answer_key={e.answer_key}
+              />
             </Paper>
           </Grid>
         ))}

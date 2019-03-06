@@ -13,7 +13,9 @@ class mRadioButton extends Component {
     super(props);
 
     this.state = {
-      classes: this.props.classes
+      classes: this.props.classes,
+      answers: this.props.answers,
+      answer_key: this.props.answer_key
     };
   }
 
@@ -21,15 +23,24 @@ class mRadioButton extends Component {
     this.setState({ value: event.target.value });
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.answers !== nextProps.answers) {
+      this.setState({ answers: nextProps.answers });
+      console.log(nextProps.answers);
+    }
+
+    if (this.props.answer_key !== nextProps.answer_key) {
+      this.setState({ answer_key: nextProps.answer_key });
+      console.log(nextProps.answer_key);
+    }
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <FormControl
-          component="fieldset"
-          className={classes.formControl}
-        >
+        <FormControl component="fieldset" className={classes.formControl}>
           <RadioGroup
             aria-label="Q1"
             name="Q1"
@@ -37,10 +48,26 @@ class mRadioButton extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           >
-            <FormControlLabel value="a" control={<Radio />} label="a) //from db" />
-            <FormControlLabel value="b" control={<Radio />} label="b) //from db" />
-            <FormControlLabel value="c" control={<Radio />} label="c) //from db" />
-            <FormControlLabel value="d" control={<Radio />} label="d) //from db" />
+            <FormControlLabel
+              value="a"
+              control={<Radio />}
+              label={this.state.answers[0]}
+            />
+            <FormControlLabel
+              value="b"
+              control={<Radio />}
+              label={this.state.answers[1]}
+            />
+            <FormControlLabel
+              value="c"
+              control={<Radio />}
+              label={this.state.answers[2]}
+            />
+            <FormControlLabel
+              value="d"
+              control={<Radio />}
+              label={this.state.answers[3]}
+            />
           </RadioGroup>
         </FormControl>
       </div>
