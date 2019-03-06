@@ -128,8 +128,9 @@ class Questions extends Component {
           <SnackBar
             isUser={this.state.isUser}
             open={true}
-            val={`Your Score is: ${this.state.userScore /
-              this.state.questions.length}`}
+            val={`Your Score is: ${(this.state.userScore /
+              this.state.questions.length) *
+              100}`}
           />
         ) : (
           ""
