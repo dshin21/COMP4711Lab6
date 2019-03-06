@@ -15,7 +15,8 @@ class mButton extends Component {
       isSave: this.props.isSave,
       isAdd: this.props.isAdd,
       value: this.props.value,
-      idx: this.props.idx
+      idx: this.props.idx,
+      isUser: this.props.isUser
     };
   }
 
@@ -24,6 +25,7 @@ class mButton extends Component {
       this.props.deleteQuestion(this.state.value, this.state.idx);
     else if (this.state.isSave) this.props.updateQuestions();
     else if (this.state.isAdd) this.props.insertQuestions();
+    else if (this.state.isUser) this.props.determineScore();
   };
 
   render() {

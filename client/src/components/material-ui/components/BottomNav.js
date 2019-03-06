@@ -11,7 +11,8 @@ class mBottomNav extends Component {
 
     this.state = {
       classes: this.props,
-      question: this.props.question
+      question: this.props.question,
+      isUser: this.props.isUser
     };
   }
 
@@ -25,18 +26,29 @@ class mBottomNav extends Component {
         showLabels
         className={classes.root}
       >
-        <Button
-          color="secondary"
-          insertQuestions={this.props.insertQuestions}
-          BtnName={"Add"}
-          isAdd={true}
-        />
-        <Button
-          color="primary"
-          updateQuestions={this.props.updateQuestions}
-          BtnName={"Save"}
-          isSave={true}
-        />
+        {this.state.isUser ? (
+          <Button
+            color="secondary"
+            determineScore={this.props.determineScore}
+            BtnName={"Submit"}
+            isUser={this.state.isUser}
+          />
+        ) : (
+          <div>
+            <Button
+              color="secondary"
+              insertQuestions={this.props.insertQuestions}
+              BtnName={"Add"}
+              isAdd={true}
+            />
+            <Button 
+              color="primary"
+              updateQuestions={this.props.updateQuestions}
+              BtnName={"Save"}
+              isSave={true}
+            />
+          </div>
+        )}
       </BottomNavigation>
     );
   }

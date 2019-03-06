@@ -19,7 +19,11 @@ class Questions extends Component {
       questions: this.props.questions,
       isUpdate: false,
       snackDeleted: false,
-      snackSaved: false
+      snackSaved: false,
+      isUser: this.props.isUser,
+      userAnswer: [],
+      userScore: 0,
+      quizFinished: false
     };
   }
 
@@ -92,13 +96,42 @@ class Questions extends Component {
   answer_keyChanged = (idx, newVal) => {
     let temp = this.state.questions;
     temp[idx].answer_key = newVal;
-    console.log(temp);
     this.setState({ questions: temp });
+  };
+
+  determineScore = () => {
+    let tempScore = 0;
+    for (let i = 0; i < this.state.questions.length; i++) {
+      console.log(this.state.questions[i].answer_key);
+      console.log(this.state.userAnswer);
+      if (this.state.questions[i].answer_key == this.state.userAnswer[i]) {
+        tempScore++;
+      }
+    }
+    this.setState({ userScore: tempScore, quizFinished: true }, () => {
+      console.log(this.state.userScore);
+    });
+  };
+
+  getUserAnswer = (userAns, idx) => {
+    let temp = this.state.userAnswer;
+    temp[idx] = userAns;
+    this.setState({ userAnswer: temp });
   };
 
   render = () => {
     return (
       <div>
+        {this.state.isUser && this.state.quizFinished ? (
+          <SnackBar
+            isUser={this.state.isUser}
+            open={true}
+            val={`Your Score is: ${this.state.userScore /
+              (this.state.questions.length + 1)}`}
+          />
+        ) : (
+          ""
+        )}
         {this.state.snackDeleted ? (
           <SnackBar open={true} val={"Deleted Successfully!"} />
         ) : (
@@ -128,6 +161,7 @@ class Questions extends Component {
                   questionIndex={i}
                   questionChanged={this.questionChanged}
                   isQuestion={true}
+                  isUser={this.state.isUser}
                 />
                 <RadioButton
                   answers={this.parseAnswers(e.answers)}
@@ -135,15 +169,21 @@ class Questions extends Component {
                   questionIndex={i}
                   answersChanged={this.answersChanged}
                   answer_keyChanged={this.answer_keyChanged}
+                  getUserAnswer={this.getUserAnswer}
                   isAnswers={false}
+                  isUser={this.state.isUser}
                 />
-                <Button
-                  BtnName="Delete"
-                  value={e.question}
-                  idx={i}
-                  deleteQuestion={this.deleteQuestion}
-                  isDelete={true}
-                />
+                {this.state.isUser ? (
+                  ""
+                ) : (
+                  <Button
+                    BtnName="Delete"
+                    value={e.question}
+                    idx={i}
+                    deleteQuestion={this.deleteQuestion}
+                    isDelete={true}
+                  />
+                )}
               </Paper>
             </Grid>
           ))}
@@ -151,6 +191,8 @@ class Questions extends Component {
         <BottomNav
           insertQuestions={this.insertQuestions}
           updateQuestions={this.updateQuestions}
+          determineScore={this.determineScore}
+          isUser={this.state.isUser}
         />
       </div>
     );

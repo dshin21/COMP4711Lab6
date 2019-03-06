@@ -15,7 +15,7 @@ class App extends Component {
               <Link to="/admin">Admin</Link>
             </li>
             <li>
-              <Link to="/aser">User</Link>
+              <Link to="/user">User</Link>
             </li>
           </ul>
           <hr />

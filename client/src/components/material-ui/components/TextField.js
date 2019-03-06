@@ -14,7 +14,8 @@ class mTextField extends Component {
       value: this.props.value,
       isQuestion: this.props.isQuestion,
       questionIndex: this.props.questionIndex,
-      answers_idx: this.props.answers_idx
+      answers_idx: this.props.answers_idx,
+      isUser: this.props.isUser
     };
   }
 
@@ -61,6 +62,8 @@ class mTextField extends Component {
         id="custom-css-outlined-input"
         value={this.state.value}
         onChange={this.handleChange.bind(this)}
+        isUser={this.state.isUser}
+        disabled={this.state.isUser ? true : false}
       />
     );
   };

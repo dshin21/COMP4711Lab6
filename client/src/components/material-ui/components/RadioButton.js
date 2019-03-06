@@ -17,17 +17,27 @@ class mRadioButton extends Component {
       classes: this.props.classes,
       answers: this.props.answers,
       answer_key: this.props.answer_key,
-      questionIndex: this.props.questionIndex
+      questionIndex: this.props.questionIndex,
+      userAnswer: "",
+      isUser: this.props.isUser
     };
   }
 
   handleChange = event => {
-    this.setState({ answer_key: event.target.value }, () => {
-      this.props.answer_keyChanged(
-        this.state.questionIndex,
-        this.state.answer_key
-      );
-    });
+    this.setState(
+      { answer_key: event.target.value, userAnswer: event.target.value },
+      () => {
+        this.props.getUserAnswer(
+          this.state.userAnswer,
+          this.state.questionIndex
+        );
+        if (!this.state.isUser)
+          this.props.answer_keyChanged(
+            this.state.questionIndex,
+            this.state.answer_key
+          );
+      }
+    );
   };
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +60,7 @@ class mRadioButton extends Component {
             aria-label="Q"
             name="Q"
             className={classes.group}
-            value={this.state.answer_key}
+            value={this.state.isUser ? undefined : this.state.answer_key}
             onChange={this.handleChange}
           >
             <FormControlLabel
@@ -62,6 +72,7 @@ class mRadioButton extends Component {
                   answersChanged={this.props.answersChanged}
                   value={this.state.answers[0]}
                   answers_idx={0}
+                  isUser={this.props.isUser}
                 />
               }
             />
@@ -74,6 +85,7 @@ class mRadioButton extends Component {
                   answersChanged={this.props.answersChanged}
                   value={this.state.answers[1]}
                   answers_idx={1}
+                  isUser={this.props.isUser}
                 />
               }
             />
@@ -86,6 +98,7 @@ class mRadioButton extends Component {
                   answersChanged={this.props.answersChanged}
                   value={this.state.answers[2]}
                   answers_idx={2}
+                  isUser={this.props.isUser}
                 />
               }
             />
@@ -98,6 +111,7 @@ class mRadioButton extends Component {
                   answersChanged={this.props.answersChanged}
                   value={this.state.answers[3]}
                   answers_idx={3}
+                  isUser={this.props.isUser}
                 />
               }
             />

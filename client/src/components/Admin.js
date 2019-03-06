@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Questions from "./Questions";
-class Topic extends Component {
+class Admin extends Component {
   constructor(props) {
     super(props);
 
@@ -37,4 +37,4 @@ class Topic extends Component {
   };
 }
 
-export default Topic;
+export default Admin;
