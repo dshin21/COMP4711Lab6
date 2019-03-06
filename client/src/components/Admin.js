@@ -8,14 +8,17 @@ class Topic extends Component {
       match: this.props.match,
       questions: []
     };
+    this.getQuestions();
+
   }
 
   componentDidMount = () => {
-    this.getQuestions();
+    // this.getQuestions();
   };
 
   getQuestions = _ => {
-    fetch("https://comp4711lab6.herokuapp.com/admin/read")
+    // fetch("https://comp4711lab6.herokuapp.com/admin/read")
+    fetch("http://localhost:5000/admin/read")
       .then(response => response.json())
       .then(response =>
         this.setState(
