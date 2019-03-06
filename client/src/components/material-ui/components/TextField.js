@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import styles from "../styles/style_Question";
-
 import { TextField } from "@material-ui/core";
+
+import styles from "../styles/style_Question";
 
 class mTextField extends Component {
   constructor(props) {
@@ -11,13 +11,19 @@ class mTextField extends Component {
     this.state = {
       match: this.props.match,
       classes: this.props,
-      questions: []
+      question: this.props.question
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.question !== nextProps.question) {
+      this.setState({ question: nextProps.question });
+      console.log(nextProps.question);
+    }
   }
 
   render = () => {
     return (
-      <div>
         <TextField
           style={{ width: "100%" }}
           className={this.state.classes.margin}
@@ -34,11 +40,10 @@ class mTextField extends Component {
               notchedOutline: this.state.notchedOutline
             }
           }}
-          label={this.state.questions}
+          label={this.state.question}
           variant="outlined"
           id="custom-css-outlined-input"
         />
-      </div>
     );
   };
 }

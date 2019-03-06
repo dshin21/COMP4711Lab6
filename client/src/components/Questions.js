@@ -19,8 +19,12 @@ class Questions extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.questions !== nextProps.questions) {
-      this.setState({ questions: nextProps.questions });
-      // console.log(nextProps.questions);
+      this.setState({ questions: nextProps.questions }, () => {
+        this.state.questions.map((e, i) => {
+          // console.log(e.question);
+        });
+      });
+      // console.log(nextProps.questions[0].question);
     }
   }
 
@@ -40,7 +44,7 @@ class Questions extends Component {
               justify="center"
               style={{ padding: 20 }}
             >
-              <TextField info={e} />
+              <TextField question={e.question} />
               <RadioButton />
             </Paper>
           </Grid>
