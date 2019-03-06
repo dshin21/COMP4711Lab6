@@ -57,9 +57,9 @@ class Questions extends Component {
 
     this.state.questions.map(e => {
       fetch(
-        `https://comp4711lab6.herokuapp.com/admin/insert?question=${e.question}&answers=${
-          e.answers
-        }&answer_key=${e.answer_key}`
+        `https://comp4711lab6.herokuapp.com/admin/insert?question=${
+          e.question
+        }&answers=${e.answers}&answer_key=${e.answer_key}`
       )
         .then(response => response.json())
         .catch(err => console.log(err));
@@ -69,7 +69,9 @@ class Questions extends Component {
   };
 
   deleteQuestion = (question, idx) => {
-    fetch(`https://comp4711lab6.herokuapp.com/admin/delete?question=${question}`)
+    fetch(
+      `https://comp4711lab6.herokuapp.com/admin/delete?question=${question}`
+    )
       .then(response => response.json())
       .catch(err => console.log(err));
     let temp = this.state.questions;
@@ -127,7 +129,7 @@ class Questions extends Component {
             isUser={this.state.isUser}
             open={true}
             val={`Your Score is: ${this.state.userScore /
-              (this.state.questions.length + 1)}`}
+              this.state.questions.length}`}
           />
         ) : (
           ""
