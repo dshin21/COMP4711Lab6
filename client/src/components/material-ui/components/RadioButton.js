@@ -15,7 +15,7 @@ class mRadioButton extends Component {
     this.state = {
       classes: this.props.classes,
       answers: this.props.answers,
-      answer_key: this.props.answer_key
+      answer_key: this.props.answer_key,
     };
   }
 
@@ -45,7 +45,7 @@ class mRadioButton extends Component {
             aria-label="Q1"
             name="Q1"
             className={classes.group}
-            value={this.state.value}
+            value={this.state.answer_key}
             onChange={this.handleChange}
           >
             <FormControlLabel
