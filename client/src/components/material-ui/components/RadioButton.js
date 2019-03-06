@@ -23,19 +23,20 @@ class mRadioButton extends Component {
 
   handleChange = event => {
     this.setState({ answer_key: event.target.value }, () => {
-      this.props.answer_keyChanged();
+      this.props.answer_keyChanged(
+        this.state.questionIndex,
+        this.state.answer_key
+      );
     });
   };
 
   componentWillReceiveProps(nextProps) {
     if (this.props.answers !== nextProps.answers) {
       this.setState({ answers: nextProps.answers });
-      console.log(nextProps.answers);
     }
 
     if (this.props.answer_key !== nextProps.answer_key) {
       this.setState({ answer_key: nextProps.answer_key });
-      console.log(nextProps.answer_key);
     }
   }
 

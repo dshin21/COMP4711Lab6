@@ -32,11 +32,6 @@ app.set("port", process.env.PORT || 5000);
 // connection.query("USE comp4711_lab6", err => {
 //   if (err) throw err;
 // });
-// let query_create_questions_table = `CREATE TABLE questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255))`;
-// connection.query(query_create_questions_table, (error, results) => {
-//   if (error) console.log(error);
-//   else console.log("table created");
-// });
 
 app.get("/admin/read", (req, res) => {
   let query_create_DB = "CREATE DATABASE IF NOT EXISTS comp4711_lab6";
@@ -44,7 +39,12 @@ app.get("/admin/read", (req, res) => {
     if (err) console.log(err);
   });
 
-  
+  // let query_create_questions_table = `CREATE TABLE questions (question VARCHAR(255), answers VARCHAR(255), answer_key VARCHAR(255), PRIMARY KEY (question))`;
+  // connection.query(query_create_questions_table, (error, results) => {
+  //   if (error) console.log(error);
+  //   else console.log("table created");
+  // });
+
   //read questions & answers
   let query_read_questions = `SELECT *
                               FROM questions`;
@@ -57,12 +57,24 @@ app.get("/admin/read", (req, res) => {
   });
 });
 
+app.get("/admin/truncate", (req, res) => {
+  let query_truncate = `TRUNCATE TABLE questions`;
+  connection.query(query_truncate, (error, results) => {
+    if (error) throw error;
+    else console.log(results);
+  });
+});
+
 app.get("/admin/insert", (req, res) => {
   //insert a new question & answer
   const { question, answers, answer_key } = req.query;
+  // let query_insert_question = `INSERT INTO questions (question, answers, answer_key)
+  //                               VALUES('${question}','${answers}','${answer_key}')`;
 
-  let query_insert_question = `INSERT INTO questions (question, answers, answer_key) 
-                                VALUES('${question}','${answers}','${answer_key}')`;
+  let query_insert_question = `REPLACE INTO questions
+                                  SET question = '${question}',
+                                      answers = '${answers}',
+                                      answer_key = '${answer_key}'`;
   connection.query(query_insert_question, (error, results) => {
     if (error) throw error;
     else console.log(results);

@@ -14,17 +14,21 @@ class Questions extends Component {
     this.state = {
       match: this.props.match,
       classes: this.props.classes,
-      questions: this.props.questions
+      questions: this.props.questions,
+      isUpdate: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.questions !== nextProps.questions) {
-      this.setState({ questions: nextProps.questions }, () => {
-        this.state.questions.map((e, i) => {
-          // console.log(e.question);
-        });
-      });
+      this.setState(
+        { questions: nextProps.questions }
+        // , () => {
+        // this.state.questions.map((e, i) => {
+        //   // console.log(e.question);
+        // });
+        // }
+      );
       console.log(nextProps.questions);
     }
   }
@@ -33,39 +37,55 @@ class Questions extends Component {
     return answerString.split(",");
   };
 
-  insertQuestions = (question, answers, answer_key) => {
-    // fetch(
-    //   `https://comp4711assignment.herokuapp.com/players/add?name=${name}&score=${score}`
-    // )
-    fetch(
-      `http://localhost:5000/admin/insert?question=${question}&answers=${answers}&answer_key${answer_key}`
-    )
+  // insertQuestions = (question, answers, answer_key) => {
+  //   // fetch(
+  //   //   `https://comp4711assignment.herokuapp.com/players/add?name=${name}&score=${score}`
+  //   // )
+  //   fetch(
+  //     `http://localhost:5000/admin/insert?question=${question}&answers=${answers}&answer_key${answer_key}`
+  //   )
+  //     .then(response => response.json())
+  //     .catch(err => console.log(err));
+  //   // console.log(this.state.questions);
+  // };
+
+  updateQuestions = (question, answers, answer_key) => {
+    fetch(`http://localhost:5000/admin/truncate`)
       .then(response => response.json())
       .catch(err => console.log(err));
+
+    this.state.questions.map(e => {
+      fetch(
+        `http://localhost:5000/admin/insert?question=${e.question}&answers=${
+          e.answers
+        }&answer_key=${e.answer_key}`
+      )
+        .then(response => response.json())
+        .catch(err => console.log(err));
+      console.log(e.answers);
+    });
   };
 
   questionChanged = (idx, newVal) => {
     let temp = this.state.questions;
     temp[idx].question = newVal;
-    console.log(temp);
     this.setState({ questions: temp });
   };
 
   answersChanged = (idx, arr_idx, newVal) => {
-    console.log(idx, arr_idx, newVal);
     let temp = this.state.questions;
-    // console.log(temp);
     let tempAns = temp[idx].answers.split(",");
     tempAns[arr_idx] = newVal;
     tempAns = tempAns.join(",");
     temp[idx].answers = tempAns;
-
-    console.log(temp);
-    // this.setState({ questions: temp });
+    this.setState({ questions: temp });
   };
 
   answer_keyChanged = (idx, newVal) => {
-    console.log("acC");
+    let temp = this.state.questions;
+    temp[idx].answer_key = newVal;
+    console.log(temp);
+    this.setState({ questions: temp });
   };
 
   render = () => {
@@ -103,7 +123,7 @@ class Questions extends Component {
             </Grid>
           ))}
         </Grid>
-        <BottomNav insertQuestions={this.insertQuestions} />
+        <BottomNav updateQuestions={this.updateQuestions} />
       </div>
     );
   };

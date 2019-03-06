@@ -8,19 +8,26 @@ class mButton extends Component {
     super(props);
 
     this.state = {
-      classes: this.props
+      classes: this.props,
+      BtnName: this.props.BtnName,
+      color: this.props.color
     };
   }
 
+  handleClick = () => {
+    this.props.updateQuestions();
+  };
 
   render() {
     return (
       <Button
         variant="contained"
         className={this.state.classes.button}
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 20, marginRight: 20 }}
+        onClick={() => this.handleClick()}
+        color={this.state.color}
       >
-        Save
+        {this.state.BtnName}
       </Button>
     );
   }

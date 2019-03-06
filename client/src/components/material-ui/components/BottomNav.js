@@ -25,7 +25,16 @@ class mBottomNav extends Component {
         showLabels
         className={classes.root}
       >
-        <Button color="primary" />
+        <Button
+          color="secondary"
+          updateQuestions={this.props.updateQuestions}
+          BtnName={"Add"}
+        />
+        <Button
+          color="primary"
+          updateQuestions={this.props.updateQuestions}
+          BtnName={"Save"}
+        />
       </BottomNavigation>
     );
   }

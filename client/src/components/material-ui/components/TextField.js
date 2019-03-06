@@ -35,7 +35,6 @@ class mTextField extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value) {
       this.setState({ value: nextProps.value });
-      // console.log(nextProps.value);
     }
   }
 
