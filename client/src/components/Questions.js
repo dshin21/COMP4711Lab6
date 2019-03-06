@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import styles from "./material-ui/styles/style_Grid";
-// import QuestionList from "./QuestionList";
 import TextField from "./material-ui/components/TextField";
 import RadioButton from "./material-ui/components/RadioButton";
 import Paper from "@material-ui/core/Paper";
+
 class Questions extends Component {
   constructor(props) {
     super(props);
